@@ -5,21 +5,21 @@ from __future__ import annotations
 from typing import List, Optional
 from typing_extensions import Literal, Required, TypedDict
 
-from ..._types import SequenceNotStr
-from .beta_user_location_param import BetaUserLocationParam
-from .beta_cache_control_ephemeral_param import BetaCacheControlEphemeralParam
+from .._types import SequenceNotStr
+from .user_location_param import UserLocationParam
+from .cache_control_ephemeral_param import CacheControlEphemeralParam
 
-__all__ = ["BetaWebSearchTool20250305Param"]
+__all__ = ["WebSearchTool20260209Param", "UserLocation"]
 
 
-class BetaWebSearchTool20250305Param(TypedDict, total=False):
+class WebSearchTool20260209Param(TypedDict, total=False):
     name: Required[Literal["web_search"]]
     """Name of the tool.
 
     This is how the tool will be called by the model and in `tool_use` blocks.
     """
 
-    type: Required[Literal["web_search_20250305"]]
+    type: Required[Literal["web_search_20260209"]]
 
     allowed_callers: List[Literal["direct", "code_execution_20250825", "code_execution_20260120"]]
 
@@ -35,7 +35,7 @@ class BetaWebSearchTool20250305Param(TypedDict, total=False):
     Cannot be used alongside `allowed_domains`.
     """
 
-    cache_control: Optional[BetaCacheControlEphemeralParam]
+    cache_control: Optional[CacheControlEphemeralParam]
     """Create a cache control breakpoint at this content block."""
 
     defer_loading: bool
@@ -50,8 +50,11 @@ class BetaWebSearchTool20250305Param(TypedDict, total=False):
     strict: bool
     """When true, guarantees schema validation on tool names and inputs"""
 
-    user_location: Optional[BetaUserLocationParam]
+    user_location: Optional[UserLocationParam]
     """Parameters for the user's location.
 
     Used to provide more relevant search results.
     """
+
+
+UserLocation = UserLocationParam  # backward compat alias
